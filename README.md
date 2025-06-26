@@ -1,45 +1,70 @@
 # CODTECH-TASK-1
-#include  <dht.h>
-#include <LiquidCrystal.h>
+## Name:P.kalpana
+## Company:CODETECH IT SOLUTIONS
+## ID:CT06DF1896
+## Domain:Embedded Systems
+## Duration:May to july
+## Mentor:Neela Santhosh kumar
+## OVERVIEW of the project
+## Project:Temperature Monitoring System - Project Overview
+## CIRCUIT DIAGRAM: ![Uploading WhatsApp Image 2025-06-17 at 17.09.59_82dc4072.jpg…]()
+## Project Purpose
+This project creates a real-time temperature monitoring system that measures ambient temperature and displays the readings through both a physical LCD screen and a computer's serial monitor.
 
-//variable declarations
-dht DHT;
-double  tempF = 0;
-double tempK = 0;
-const int RS = 2, EN = 3, D4 = 4, D5 = 5, D6  = 6, D7 = 7;
+## Key Components
 
-LiquidCrystal lcd(RS,EN,D4,D5,D6,D7);   //set Uno pins that  are connected to LCD, 4-bit mode
+### Hardware
+- Microcontroller: Arduino Uno (the brain of the system)
+- Sensor: LM35 precision temperature sensor (converts temperature to electrical signals)
+- Display: 16×2 LCD with I2C interface (for visual output)
+- Interface: I2C module (simplifies LCD connections)
+- Supporting Components: Breadboard and jumper wires
 
-void setup() {
-  lcd.begin(20,4);    //set  20 columns and 4 rows of 16x2 LCD
+### Software
+- Arduino IDE programming environment
+- Custom code handling temperature reading and display functions
+- Libraries for LCD communication (Wire.h and LiquidCrystal_I2C.h)
 
-}
+## How It Works
 
-void loop() {
-  int readDHT  = DHT.read11(8);      //grab the 40-bit data packet from DHT sensor
+1. Temperature Sensing:
+   - The LM35 sensor generates an analog voltage proportional to temperature (10mV per °C)
+   - Arduino reads this voltage through its analog-to-digital converter (ADC)
 
-  tempF  = DHT.temperature*9/5 + 32;   //convert temp to Fahrenheit
-  tempK = DHT.temperature  + 273.15;   //convert temp to Kelvin
-  lcd.print("Temp: ");
-  lcd.print(DHT.temperature);     //display temp in C on LCD
-  lcd.print("C");
+2. Data Processing:
+   - The raw ADC value is converted to voltage
+   - Voltage is then converted to temperature in Celsius
+   - Calculations account for the sensor's 10mV/°C characteristic
 
-  lcd.setCursor(0,1);
-  lcd.print("Temp: ");
-  lcd.print(tempF);     //display temp in F on LCD
-  lcd.print("F");
+3. Output Display:
+   - LCD Screen: Shows current temperature with "°C" units
+   - Serial Monitor: Provides detailed temperature logs for debugging
 
-  lcd.setCursor(0,2);
-  lcd.print("Temp: ");
-  lcd.print(tempK);     //display temp in Kelvin on LCD
-  lcd.print("K");
-    
-  lcd.setCursor(0,3);
-  lcd.print("Humidity: ");
-  lcd.print(DHT.humidity);
-  lcd.print("%");
-  lcd.setCursor(0,0);
-  delay(2000); 
+## Technical Features
 
-}
-Display data on 16x2 LCD
+- Dual Output: Simultaneous display on LCD and serial monitor
+- Precision: LM35 provides ±0.5°C accuracy at room temperature
+- Refresh Rate: Updates every second for real-time monitoring
+- Simple Calibration: No need for complex calibration due to LM35's linear output
+
+## Applications
+
+This system can be adapted for:
+- Home temperature monitoring
+- Laboratory equipment
+- Industrial process monitoring
+- Educational demonstrations of sensor systems
+- Data logging applications (with additional code)
+
+## Expansion Possibilities
+
+The basic design can be enhanced with:
+- Additional sensors (humidity, pressure)
+- Data logging to SD card
+- Wireless transmission capabilities
+- Temperature alerts and thresholds
+- Web-based monitoring interface
+- ## Output demonstration: ![WhatsApp Image 2025-06-17 at 17 10 55_43411286](https://github.com/user-attachments/assets/29467e53-24f9-4d53-8e27-37cb0f42f259)
+
+- 
+- 
